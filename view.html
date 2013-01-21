@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>HackerIO</title>
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+<link rel="stylesheet/less" type="text/css" href="css/style.less" />
+</head>
+
+<body ng-app="hackerio">
+	This is a demonstration on how to use AngularJS to construct a tree widget.  In this case, we also use Font Awesome for the graphics.
+	<div id="content">
+		<div id="project-tree" class="tree">
+			
+			<script type="text/ng-template" id="tree_item_renderer.html">
+		    	
+		       <i id="project-tree-node-closed-{{data.name}}" class="icon-folder-close-alt tree-icon" ng-show="data.nodes.length == 0 && data.hiddenNodes.length == 0 && data.type == 'folder'" ng-click="toggle(data)"></i>
+		       <i id="project-tree-node-closed-{{data.name}}" class="icon-folder-close tree-icon" ng-show="data.nodes.length == 0 && data.hiddenNodes.length > 0 && data.type == 'folder'" ng-click="toggle(data)"></i>
+		       <i id="project-tree-node-open-{{data.name}}" class="icon-folder-open tree-icon" ng-show="data.nodes.length > 0 && data.type == 'folder'" 		          ng-click="toggle(data)"></i>
+		       <i id="project-tree-file-{{data.name}}" class="icon-file-alt tree-icon"  ng-show="data.type != 'folder'"></i>
+		       
+		       {{data.name}}
+		       
+		       <button ng-click="add(data, 'folder')" ng-show="data.type == 'folder'">Add Folder</button>
+		       <button ng-click="add(data, 'file')" ng-show="data.type == 'folder'">Add File</button>
+		       <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+		       
+		       <ul>
+		           <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
+		       </ul>
+			
+			</script>
+
+			<ul ng-app="hackerio-project-tree" ng-controller="TreeController">
+				<li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+			</ul>
+		</div>
+	<div>
+	
+	<script src="scripts/jquery.min.js"     type="text/javascript"></script>
+	<script src="scripts/less.js"           type="text/javascript"></script>
+	<script src="scripts/angular.min.js"    type="text/javascript"></script>
+	
+	<script type"text/javascript">
+		
+		angular.module("hackerio", []).
+		
+		controller("TreeController", ['$scope', function($scope) {
+		    
+		    $scope.delete = function(data) {
+		    	if (data.hidden) {
+		    		data.hiddenNodes = [];
+		    	} else {
+		        	data.nodes = [];
+		        }
+		    };
+
+		    $scope.toggle = function(data) {
+		        
+		        if (data.hidden) {
+		        	data.hidden      = false;
+		    		data.nodes       = data.hiddenNodes.slice(0);
+		        	data.hiddenNodes = [];
+		        	
+		    	} else {
+		    		data.hidden      = true;
+		        	data.hiddenNodes = data.nodes.slice(0);
+		        	data.nodes       = [];	
+		    	}
+		    };
+
+		    $scope.add = function(data, type) {
+		    	name = data.name;
+		    	if (type == 'file') {
+		    		name = type
+		    	}
+
+		    	if (data.hidden){
+		    		var post    = data.hiddenNodes.length + 1;		
+			        var newName = name + '-' + post;
+			        data.hiddenNodes.push({name: newName,nodes: [], hiddenNodes:[], type: type});
+
+		    	} else {
+			        var post    = data.nodes.length + 1;
+			        var newName = name + '-' + post;
+			        data.nodes.push({name: newName,nodes: [], hiddenNodes:[], type: type});
+		    	}
+
+		    	data.nodes.sort(function(a, b){
+		    		if (a.type == b.type) {
+		    			if (a.name>b.name){
+		    				return -1;
+		    			} else {
+		    				return 1;
+		    			} 
+		    		} else if (a.type == 'folder') {
+		    			return -1;
+		    		} else if (b.type == 'folder') {
+		    			return 1;
+		    		} else {
+		    			return 0;
+		    		}
+		    	});
+		    };
+		
+		    $scope.tree = [{name: "folder", nodes: [], hiddenNodes:[], type: 'folder'}];
+		}]);
+
+	</script>
+
+	
+</body>
+
+</html>

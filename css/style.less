@@ -1,0 +1,72 @@
+@ActiveBorder 	  	 : #222222; // Active window border.
+@ActiveCaption 	  	 : #ffffff; // Active window caption.
+@AppWorkspace 	  	 : #333333; // Background color of multiple document interface.
+@Background 	  	 : #272727; // Desktop background.
+@ButtonFace 	  	 : #272727; // Face color for three-dimensional display elements.
+@ButtonHighlight 	 : #333333; // Dark shadow for three-dimensional display elements (for edges facing away from the light source).
+@ButtonShadow 	  	 : #222222; // Shadow color for three-dimensional display elements.
+@ButtonText 	  	 : #777777; // Text on push buttons.
+@CaptionText 	  	 : #777777; // Text in caption, size box, and scrollbar arrow box.
+@GrayText 	  	     : #555555; // Grayed (disabled) text. This color is set to #000 if the current display driver does not support a solid gray color.
+@Highlight 	  	     : #555577; // Item(s) selected in a control.
+@HighlightText 	  	 : #bbbbff; // Text of item(s) selected in a control.
+@InactiveBorder 	 : #444444; // Inactive window border.
+@InactiveCaption 	 : #cccccc; // Inactive window caption.
+@InactiveCaptionText : #aaaaaa; // Color of text in an inactive caption.
+@InfoBackground 	 : #ffffcc; // Background color for tooltip controls.
+@InfoText 	  	     : #777777; // Text color for tooltip controls.
+@Menu 	  	         : #272727; // Menu background.
+@MenuText 	  	     : #777777; // Text in menus.
+@Scrollbar 	  	     : #272727; // Scroll bar gray area.
+@ThreeDDarkShadow 	 : #171717; // Dark shadow for three-dimensional display elements.
+@ThreeDFace 	  	 : #222222; // Face color for three-dimensional display elements.
+@ThreeDHighlight 	 : #272727; // Highlight color for three-dimensional display elements.
+@ThreeDLightShadow 	 : #333333; // Light color for three-dimensional display elements (for edges facing the light source).
+@ThreeDShadow 	  	 : #171717; // Dark shadow for three-dimensional display elements.
+@Window 	  	     : #272727; // Window background.
+@WindowFrame 	  	 : #222222; // Window frame.
+@WindowText 	  	 : #cccccc; // Text in windows.
+
+@EditorFont          : "Monoco", monospace; 
+@EditorFontSize      : 13px;
+
+@ApplicationFont      :"Optima";
+@ApplicationFontSize  : 14px;
+
+body, html {
+	color:       @WindowText;
+	background:  @Background;
+	font-family: @EditorFont;
+	font-size:   @EditorFontSize;
+}
+
+.application-text {
+	font-family: @ApplicationFont;
+	font-size:   @ApplicationFontSize;
+}
+
+.tree {
+	.application-text;
+	list-style: none;
+	
+	.tree-icon {
+		font-size: 12px;
+		cursor: default;
+	}
+
+	ul {
+		padding-left: 0px;
+		margin-left:  8px;	
+	}
+
+	li { 
+		padding-left: 0px;
+		margin-left:  0px;
+		list-style-position: 0px;
+		list-style:   none;
+	} 
+}
+
+.tree-hidden {
+	visibility: hidden;
+}
