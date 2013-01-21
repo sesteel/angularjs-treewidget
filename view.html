@@ -3,12 +3,12 @@
 
 <head>
 <meta charset="UTF-8">
-<title>HackerIO</title>
+<title>AngularJS Tree Widget Example</title>
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <link rel="stylesheet/less" type="text/css" href="css/style.less" />
 </head>
 
-<body ng-app="hackerio">
+<body ng-app="tree-example">
 	This is a demonstration on how to use AngularJS to construct a tree widget.  In this case, we also use Font Awesome for the graphics.
 	<div id="content">
 		<div id="project-tree" class="tree">
@@ -32,7 +32,7 @@
 			
 			</script>
 
-			<ul ng-app="hackerio-project-tree" ng-controller="TreeController">
+			<ul ng-app="tree-example-tree" ng-controller="TreeController">
 				<li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
 			</ul>
 		</div>
@@ -44,7 +44,7 @@
 	
 	<script type"text/javascript">
 		
-		angular.module("hackerio", []).
+		angular.module("tree-example", []).
 		
 		controller("TreeController", ['$scope', function($scope) {
 		    
