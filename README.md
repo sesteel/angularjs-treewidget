@@ -1,4 +1,4 @@
 angularjs-treewidget
 ====================
 
-An example AngularJS tree widget
+An example of how to build a tree widget using AngularJS.
